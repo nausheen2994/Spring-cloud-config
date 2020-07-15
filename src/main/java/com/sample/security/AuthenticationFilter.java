@@ -63,7 +63,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String token=Jwts.builder()
         		     .setSubject(userDto.getUserId()).
         		     setExpiration(new Date(System.currentTimeMillis()+Long.parseLong(env.getProperty("token_expires")))).
-        		     signWith(SignatureAlgorithm.HS512, "secret_key").compact();
+        		     signWith(SignatureAlgorithm.HS512, env.getProperty("secret_key")).compact();
         res.addHeader("Token", token);
         res.addHeader("UserId", userDto.getUserId()	);
         		    
